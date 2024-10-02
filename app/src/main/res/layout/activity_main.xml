@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/background" />
+
+    <ImageView
+        android:id="@+id/background_clock"
+        android:layout_width="271dp"
+        android:layout_height="231dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginBottom="325dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/screen"
+        tools:ignore="MissingConstraints" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="179dp"
+        android:layout_height="11dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="92dp"
+        android:progressTint="@color/my_color"
+        app:layout_constraintBottom_toBottomOf="@+id/background_clock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Timer"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/Timer"
+        android:layout_width="186dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="248dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="435dp"
+        android:fontFamily="@font/germania_one"
+        android:text="00:00:00"
+        android:textColor="#442D03"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="@+id/background_clock"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/background_clock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/start_btn"
+        android:layout_width="114dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginEnd="80dp"
+        android:background="@null"
+        android:onClick="onStartButtonClick"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:srcCompat="@drawable/startbutton"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <ImageButton
+        android:id="@+id/reset_btn"
+        android:layout_width="114dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginEnd="36dp"
+        android:background="@null"
+        android:onClick="resetTimer"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/start_btn"
+        app:layout_constraintHorizontal_bias="0.966"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:srcCompat="@drawable/resetbutton"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextClock
+        android:id="@+id/clock_time"
+        android:layout_width="69dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="145dp"
+        android:fontFamily="sans-serif-black"
+        android:includeFontPadding="true"
+        android:textColor="#442D03"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/background_clock"
+        app:layout_constraintEnd_toEndOf="@+id/background"
+        app:layout_constraintHorizontal_bias="0.966"
+        app:layout_constraintStart_toEndOf="@+id/background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar2"
+        app:layout_constraintVertical_bias="0.507"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/bell"
+        android:layout_width="31dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/background_clock"
+        app:layout_constraintEnd_toStartOf="@+id/clock_time"
+        app:layout_constraintHorizontal_bias="0.911"
+        app:layout_constraintStart_toStartOf="@+id/background_clock"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar2"
+        app:layout_constraintVertical_bias="0.055"
+        app:srcCompat="@drawable/bell"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/logo_chicken"
+        android:layout_width="126dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="685dp"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/chickenface"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/text_timer"
+        android:layout_width="237dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/background_clock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_chicken"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/title"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/text_developers"
+        android:layout_width="240dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="608dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/background"
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:srcCompat="@drawable/sponsors" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
