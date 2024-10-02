@@ -8,7 +8,7 @@
 * This App is for you, we have the basics features, but it's very useful, follow the instructions below and try it!
 * This is a project made in my college with my friends Ricardo and Jonatas, the helped me at the construction of the design.
 
-  <img src="res/drawable/layout.jpeg" alt="Layout" width="100"/>
+  <img src="app/res/drawable/layout.jpeg" alt="Layout" width="100"/>
 
 ### Installation
 
