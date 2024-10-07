@@ -12,8 +12,9 @@ Android Version: Android 11+
   <img src="/app/src/main/res/drawable/layout.jpeg" alt="Layout" width="500"/>
 
 ### Installation
-1. Go to RELEASES on Github repository and on the file release-apk-v0.0.1.zip
-2. Save in your favorite cloud management.
+1. Go to RELEASES on Github repository and click on the file release-apk-v0.0.1.zip
+2. In this file .zip you will see an .apk file.
+2. Save in your favorite cloud management (if you want).
 3. Just download it and install in your android.
 
 ### Funcionalities
