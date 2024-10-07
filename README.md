@@ -6,7 +6,7 @@
 * This App is for you, we have the basics features, but it's very useful, follow the instructions below and try it!
 * This is a project made in my college with my friends Ricardo and Jonatas, they helped me at the construction of the design.
 
-# Requirements 
+### Requirements 
 Android Version: Android 11+
 
   <img src="/app/src/main/res/drawable/layout.jpeg" alt="Layout" width="500"/>
@@ -16,7 +16,7 @@ Android Version: Android 11+
 2. Save in your favorite cloud management.
 3. Just download it and install in your android.
 
-## Funcionalities
+### Funcionalities
 
 * You can choose the timer by tapping the start button 
 
