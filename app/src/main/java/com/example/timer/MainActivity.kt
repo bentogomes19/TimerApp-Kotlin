@@ -2,7 +2,6 @@ package com.example.timer
 
 // BIBLIOTECAS
 import android.annotation.SuppressLint
-import android.content.IntentSender.OnFinished
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,10 +14,14 @@ import android.widget.TextView
 import android.view.View
 import java.util.Calendar
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.media.MediaPlayer
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextClock
+import android.widget.Toast
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.DatabaseReference
 import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -51,6 +54,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var bell: ImageView
     lateinit var clock_time: TextClock
     lateinit var mediaPlayer: MediaPlayer
+    lateinit var create_btn: Button
+    private lateinit var databaseReference: DatabaseReference
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         // ATRIBUINDO OS COMPONENTES DECLARADOS NO .xml
         start_btn = findViewById(R.id.start_btn)
         reset_btn = findViewById(R.id.reset_btn)
+        create_btn = findViewById(R.id.create_btn)
         timer = findViewById(R.id.Timer)
         progressBar = findViewById(R.id.progressBar2)
         clock_time = findViewById(R.id.clock_time)
@@ -74,29 +80,68 @@ class MainActivity : AppCompatActivity() {
         progressBar.max = 100
 
         // IMPORTANDO O EFEITO SONORO
-        mediaPlayer = MediaPlayer.create(this, R.raw.galinha_sound)
+        //mediaPlayer = MediaPlayer.create(this, R.raw.galinha_sound)
 
         // DEFININDO A VISIBILIDADE INICIAL DOS COMPONENTES (SINO E O RELÓGIO) COMO GONE
         bell.visibility = View.GONE
         clock_time.visibility = View.GONE
 
+        create_btn.setOnClickListener { // SEGUNDA TELA PARA O HISTÓRICO DE TIMERS CRIADOS
+            val intent = Intent(this, TelaRecentTimers::class.java)
+            startActivity(intent)
+        }
+
+        /************* INTEGRAÇÃO FIREBASE ******************/
+        databaseReference = FirebaseDatabase.getInstance().getReference("Timers")
+
     }
 
     // DECLARAÇÃO DE VARIÁVEIS
-    private var countDownTimer: CountDownTimer? = null // CountDownTmer é uma classe do Android utilizada para criar contagens regressivas
+    private var countDownTimer: CountDownTimer? =
+        null // CountDownTmer é uma classe do Android utilizada para criar contagens regressivas
     private var isTimerRunning = false // validação se o tempo está operacional
     private var totalDuration: Long = 0 // variável para armazenar a duração total do tempo
     private var timeRemaining: Long = 0 // variável para armazenar o tempo restante
 
+//    INTEGRAÇÃO FIREBASE -> ADICIONAR O TEMPO NO BANCO DE DADOS
+
+    private fun SalvarTempoFirebase(nome: String, timerValue: String) {
+        val id = databaseReference.push().key ?: return
+        val timerData = TimerData(id, nome, timerValue) // DADOS DA DATA CLASS
+
+        databaseReference.child(id).setValue(timerData)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Timer salvo com sucesso", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Erro ao salvar o timer: ${it.message}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+    }
+
     // Método Start recebe o tempo informado pelo usuário fun showTimePicker OSB: o tempo é em milisegundos
+    @SuppressLint("DefaultLocale")
     fun startTimer(duration: Long) {
 
         if (totalDuration == 0L) { //
             totalDuration = duration // armazena a duração total apenas na primeira execução
+            // INTEGRAÇÃO FIREBASE
+            // SALVANDO OS DADOS NO BANCO DE DADOS "Timers"
+
+            val tempoSelecionado = String.format(
+                "%02d:%02d:%02d",
+                totalDuration / 3600000,
+                (totalDuration / 60000) % 60,
+                (totalDuration / 1000) % 60
+            )
+            val nomeDoTimer = "Timer de ${tempoSelecionado}."
+            // INVOCANDO A FUNÇÃO SalvarTempoFirebase com os parâmetros do nome e tempo selecionado
+            SalvarTempoFirebase(nomeDoTimer, tempoSelecionado)
         }
         timeRemaining = duration // armazena o tempo restante
         if (isTimerRunning) return // retorna caso o cronômetro seja reinicializado antes de ser pausado
         isTimerRunning = true
+
 
         // CÁLCULO DO TEMPO FINAL -> O horário em que o cronômetro terminará
         val endTime = System.currentTimeMillis() + timeRemaining
@@ -119,13 +164,16 @@ class MainActivity : AppCompatActivity() {
                 timer.text = format
 
                 // Atualizando o TextClock com o horário de término
-                var Hora_Final = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(endTime))
+                var Hora_Final =
+                    SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(endTime))
                 clock_time.text = Hora_Final // atualiza o relógio
 
                 // Atualizando a barra de progresso a medida do decorrer do tempo restante
-                val percentComplete = ((totalDuration - millisUntilFinished) * 100 / totalDuration).toInt()
+                val percentComplete =
+                    ((totalDuration - millisUntilFinished) * 100 / totalDuration).toInt()
                 progressBar.progress = percentComplete
             }
+
             // função finish é padrão do countDownTimer
             // Ela é invocada quando o cronômetro encerra sua contagem
             override fun onFinish() {
@@ -138,7 +186,7 @@ class MainActivity : AppCompatActivity() {
             }
         }.start()
 
-       // start.text = "Pause" start_btn -> pause_btn.ico
+        // start.text = "Pause" start_btn -> pause_btn.ico
         start_btn.setImageResource(R.drawable.pausebutton)
 
     }
@@ -159,6 +207,7 @@ class MainActivity : AppCompatActivity() {
         // Alterar o "nome" do botão para pause
 
     }
+
     // Método Mostrar seletor de tempo
     private fun showTimePicker() {
         val calendar = Calendar.getInstance()
@@ -189,10 +238,12 @@ class MainActivity : AppCompatActivity() {
                 // Caso o temporizador não esteja em execução e o tempo restante for zero, mostre o TimePicker
                 showTimePicker() // permitir que usuário possa escolher o tempo
             }
+
             isTimerRunning -> {
                 // Se o temporizador estiver em execução, pause-o
                 pauseTimer()
             }
+
             else -> {
                 // Caso contrário, retome o temporizador
                 resumeTimer()
@@ -221,5 +272,4 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         mediaPlayer.release()
     }
-
 }
