@@ -33,7 +33,10 @@ Android Version: Android 11+
 
 * When the timer if off, you will hear the alarm ringing! 
 
+# Updates 
 
+* December 9th -> Integration of Realtime Database (Firebase)
+ 
 # References
 * https://developer.android.com/reference/kotlin/android/os/CountDownTimer
 * https://developer.android.com/reference/kotlin/android/widget/ProgressBar
