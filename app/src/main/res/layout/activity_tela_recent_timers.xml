@@ -7,4 +7,113 @@
     android:layout_height="match_parent"
     tools:context=".TelaRecentTimers">
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/background" />
+
+    <ImageView
+        android:id="@+id/background_clock"
+        android:layout_width="271dp"
+        android:layout_height="231dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginBottom="325dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/screen"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/text_timer"
+        android:layout_width="237dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/background_clock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_chicken"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/title"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/logo_chicken"
+        android:layout_width="126dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="685dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/chickenface"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/text_developers"
+        android:layout_width="240dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="608dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.574"
+        app:srcCompat="@drawable/sponsors" />
+
+    <ImageButton
+        android:id="@+id/edit_btn"
+        android:layout_width="114dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="452dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:srcCompat="@drawable/editbutton"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/voltar_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:text="Voltar"
+        app:layout_constraintBottom_toTopOf="@+id/text_developers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/background_clock"
+        app:layout_constraintVertical_bias="0.265" />
+
+    <ListView
+        android:id="@+id/ListTimer"
+        android:layout_width="258dp"
+        android:layout_height="225dp"
+        android:layout_marginTop="183dp"
+        app:layout_constraintBottom_toTopOf="@+id/voltar_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

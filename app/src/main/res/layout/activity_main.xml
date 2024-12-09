@@ -172,6 +172,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/background"
         app:layout_constraintTop_toTopOf="@+id/background"
+        app:layout_constraintVertical_bias="0.574"
         app:srcCompat="@drawable/sponsors" />
+
+    <Button
+        android:id="@+id/create_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History"
+        app:layout_constraintBottom_toTopOf="@+id/text_developers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/background_clock"
+        app:layout_constraintVertical_bias="0.642" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
