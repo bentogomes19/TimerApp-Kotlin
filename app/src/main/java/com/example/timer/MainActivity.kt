@@ -16,10 +16,13 @@ import java.util.Calendar
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.media.MediaPlayer
+import android.text.InputType
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextClock
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DatabaseReference
 import java.sql.Date
@@ -134,9 +137,8 @@ class MainActivity : AppCompatActivity() {
                 (totalDuration / 60000) % 60,
                 (totalDuration / 1000) % 60
             )
-            val nomeDoTimer = "Timer de ${tempoSelecionado}."
-            // INVOCANDO A FUNÇÃO SalvarTempoFirebase com os parâmetros do nome e tempo selecionado
-            SalvarTempoFirebase(nomeDoTimer, tempoSelecionado)
+            mostrarDialogoNomedoTimer(tempoSelecionado)
+
         }
         timeRemaining = duration // armazena o tempo restante
         if (isTimerRunning) return // retorna caso o cronômetro seja reinicializado antes de ser pausado
@@ -253,7 +255,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     // Método Reset
     fun resetTimer(view: View) {
         countDownTimer?.cancel()
@@ -271,5 +272,34 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
+    }
+    // MÉTODO PARA MOSTRAR UM ALERTA PERGUNTANDO SE O USUÁRIO DESEJA COLOCAR UM NOME PARA O TIMER
+    fun mostrarDialogoNomedoTimer(tempoSelecionado: String) {
+        val input = EditText(this)
+        input.inputType = InputType.TYPE_CLASS_TEXT
+
+        // Diálogo de alerta - mostrar se o usuário deseja denominar um nome para o timer
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Digite o nome do timer")
+        builder.setMessage("Insira um nome para o seu timer: ")
+
+        // Define o EditText como o conteúdo do AlertDialog
+        builder.setView(input)
+
+        builder.setPositiveButton("Iniciar") {dialog, _ ->
+            val nomeTimer = input.text.toString()
+            if (nomeTimer.isNotEmpty()) {
+                val nomeDoTimer = "$nomeTimer"
+                SalvarTempoFirebase(nomeDoTimer, tempoSelecionado)
+                dialog.dismiss()
+            } else {
+                Toast.makeText(this, "Por favor, insiria um nome para o timer", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.show()
     }
 }
