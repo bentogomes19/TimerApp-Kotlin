@@ -24,8 +24,7 @@ import com.google.firebase.database.ValueEventListener
 import java.util.Timer
 
 class TelaRecentTimers : AppCompatActivity() {
-    lateinit var voltar_btn: Button
-    lateinit var edit_btn: ImageButton
+    lateinit var voltar_btn: ImageButton
     lateinit var listTimer: ListView
     lateinit var databaseReference: DatabaseReference
 
@@ -45,7 +44,6 @@ class TelaRecentTimers : AppCompatActivity() {
 
 
         voltar_btn = findViewById(R.id.voltar_btn)
-        edit_btn = findViewById(R.id.edit_btn)
 
         listTimer = findViewById(R.id.ListTimer)
 
@@ -73,8 +71,8 @@ class TelaRecentTimers : AppCompatActivity() {
 
         listTimer.setOnItemClickListener { _, _, position, _ ->
             val TimerSelecionado = ListaTimers[position]
-            Toast.makeText(this, "Selecionado: ${TimerSelecionado}", Toast.LENGTH_SHORT).show()
-            onClickDeletarDados(TimerSelecionado.id, TimerSelecionado.nome)
+            //Toast.makeText(this, "Selecionado: ${TimerSelecionado}", Toast.LENGTH_SHORT).show()
+            DeletarIniciarTimer(TimerSelecionado.id, TimerSelecionado.nome)
         }
 
     }
@@ -97,17 +95,25 @@ class TelaRecentTimers : AppCompatActivity() {
             }
         })
     }
-    //****************************************************************
-    // ******************* MÉTODO DELETAR DADOS **********************
-    //****************************************************************
+    //************************************************************************
+    // ******************* MÉTODO DELETAR/INICIAR TIMER **********************
+    //************************************************************************
 
-    fun onClickDeletarDados(id: String, nome: String) {
+    fun DeletarIniciarTimer(id: String, nome: String) {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Deletar Timer")
-        builder.setMessage("Você tem certeza que deseja deletar o timer: '$nome'?")
+        builder.setTitle("Escolha uma opção")
+        builder.setMessage("O que deseja fazer com este timer: '$nome'?")
 
-        builder.setPositiveButton("Sim")  {_, _ ->
-            // deletar do firebase
+        // CASO O USUÁRIO DECIDA INICIAR O TIMER
+        // SEM IMPLEMENTAÇÃO
+        builder.setPositiveButton("Iniciar")  {_, _ ->
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+
+        }
+
+        // CASO O USUÁRIO DESEJE EXCLUIR O TIMER
+        builder.setNegativeButton("Excluir") { dialog, _ ->
             databaseReference.child(id).removeValue()
                 .addOnSuccessListener {
                     Toast.makeText(this, "Timer removido com sucesso!", Toast.LENGTH_SHORT).show()
@@ -117,20 +123,7 @@ class TelaRecentTimers : AppCompatActivity() {
                 }
         }
 
-        builder.setNegativeButton("Não") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-
         val alertDialog = builder.create()
         alertDialog.show()
-    }
-
-
-    //****************************************************************
-    // ******************* MÉTODO EDITAR DADOS ***********************
-    //****************************************************************
-    fun onClickEditarDados(view: View) {
-
     }
 }
