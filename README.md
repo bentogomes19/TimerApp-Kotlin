@@ -33,10 +33,15 @@ Android Version: Android 11+
 
 * When the timer if off, you will hear the alarm ringing! 
 
-# Updates 
+
+### New Features 
 
 * December 9th -> Integration of Realtime Database (Firebase)
- 
+
+* The user can create an name for the timer.
+
+* The Button history shows the history of all timers created by the user.
+
 # References
 * https://developer.android.com/reference/kotlin/android/os/CountDownTimer
 * https://developer.android.com/reference/kotlin/android/widget/ProgressBar
