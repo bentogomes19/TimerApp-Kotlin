@@ -78,42 +78,29 @@
         app:layout_constraintVertical_bias="0.574"
         app:srcCompat="@drawable/sponsors" />
 
+    <ListView
+        android:id="@+id/ListTimer"
+        android:layout_width="251dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="183dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
     <ImageButton
-        android:id="@+id/edit_btn"
-        android:layout_width="114dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="452dp"
+        android:id="@+id/voltar_btn"
+        android:layout_width="146dp"
+        android:layout_height="52dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
-        app:srcCompat="@drawable/editbutton"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/voltar_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:text="Voltar"
         app:layout_constraintBottom_toTopOf="@+id/text_developers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/background_clock"
-        app:layout_constraintVertical_bias="0.265" />
-
-    <ListView
-        android:id="@+id/ListTimer"
-        android:layout_width="258dp"
-        android:layout_height="225dp"
-        android:layout_marginTop="183dp"
-        app:layout_constraintBottom_toTopOf="@+id/voltar_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.216"
+        app:srcCompat="@drawable/backbutton"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
