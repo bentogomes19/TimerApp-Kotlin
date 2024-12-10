@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseReference
 import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.Locale
+import kotlin.math.min
 
 // DESENVOLVEDORES
 /*
@@ -42,11 +43,21 @@ import java.util.Locale
 * https://developer.android.com/reference/kotlin/android/widget/ProgressBar
 * https://pt.stackoverflow.com/questions/85349/progressbar-n%C3%A3o-muda-de-cor
 * https://developer.android.com/reference/kotlin/android/widget/ProgressBar
+* https://developer.android.com/develop/ui/views/layout/recyclerview?hl=pt-br
+* https://developer.android.com/reference/android/widget/Adapter
+* https://firebase.google.com/docs/database/android/read-and-write
 *
 *
 * */
 // CLASSE PRINCIPAL DO PROGRAMA
 // DESENVOLVIMENTO DO TIMER (TEMPORIZADOR)
+
+// UPDATE V1.0.1
+// 1. Implementação dos timers criados na Tela principal
+// 2. Uso do Firebase (Realtime Database) BANCO DE DADOS EM TEMPO REAL
+// 3. Opção de inserir um nome para o timer
+// 4. Opção de Excluir ou iniciar o timer salvo no banco de dados (Realtime database)
+
 class MainActivity : AppCompatActivity() {
     // INTERLIGANDO OS COMPONENTES
     // DECLARAÇÃO DAS VARIÁVEIS QUE SERÃO INCIALIZADAS TARDIAMENTE
@@ -57,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var bell: ImageView
     lateinit var clock_time: TextClock
     lateinit var mediaPlayer: MediaPlayer
-    lateinit var create_btn: Button
+    lateinit var history_btn: ImageButton
     private lateinit var databaseReference: DatabaseReference
 
     @SuppressLint("MissingInflatedId")
@@ -75,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         // ATRIBUINDO OS COMPONENTES DECLARADOS NO .xml
         start_btn = findViewById(R.id.start_btn)
         reset_btn = findViewById(R.id.reset_btn)
-        create_btn = findViewById(R.id.create_btn)
+        history_btn = findViewById(R.id.history_btn)
         timer = findViewById(R.id.Timer)
         progressBar = findViewById(R.id.progressBar2)
         clock_time = findViewById(R.id.clock_time)
@@ -83,13 +94,13 @@ class MainActivity : AppCompatActivity() {
         progressBar.max = 100
 
         // IMPORTANDO O EFEITO SONORO
-        //mediaPlayer = MediaPlayer.create(this, R.raw.galinha_sound)
+        mediaPlayer = MediaPlayer.create(this, R.raw.galinha_sound)
 
         // DEFININDO A VISIBILIDADE INICIAL DOS COMPONENTES (SINO E O RELÓGIO) COMO GONE
         bell.visibility = View.GONE
         clock_time.visibility = View.GONE
 
-        create_btn.setOnClickListener { // SEGUNDA TELA PARA O HISTÓRICO DE TIMERS CRIADOS
+        history_btn.setOnClickListener { // SEGUNDA TELA PARA O HISTÓRICO DE TIMERS CRIADOS
             val intent = Intent(this, TelaRecentTimers::class.java)
             startActivity(intent)
         }
