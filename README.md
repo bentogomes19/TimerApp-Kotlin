@@ -38,7 +38,7 @@ Android Version: Android 11+
 
 * December 9th -> Integration of Realtime Database (Firebase)
 
-* The user can create an name for the timer.
+* The user can create a name for the timer.
 
 * The Button history shows the history of all timers created by the user.
 
